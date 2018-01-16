@@ -6,7 +6,7 @@ public class mainProgram extends Applet {
 	public static void main(String[] args) 
 	{
 		// TODO Auto-generated method stub
-		int a;
+		
 	}
 	
 	public void paint(Graphics g) 
