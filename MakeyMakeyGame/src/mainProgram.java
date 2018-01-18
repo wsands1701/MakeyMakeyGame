@@ -8,7 +8,6 @@ import java.awt.event.*;
 import java.awt.event.KeyListener;
 import javax.swing.*;
 import javax.swing.Timer;
-
 import java.awt.color.*;
 
 
@@ -27,12 +26,11 @@ public class mainProgram extends Applet implements KeyListener, ActionListener{
 		boolean t2fired=false;
 		boolean t1completed=true;
 		boolean t2completed=true;
-		Timer t= new Timer(10, this);;
+		Timer t= new Timer(10, this);
 
 		
 	public static void main(String[] args) 
 	{
-		// TODO Auto-generated method stub
 	
 	}
 	public void init() {
@@ -46,18 +44,12 @@ public class mainProgram extends Applet implements KeyListener, ActionListener{
 		b1y=tank1y+20;
 		t1fired=true;
 		t.start();
-		
-		
-		
 	}
 	public void b2fired() {
 		b2x=tank2x+10;
 		b2y=tank2y+20;
 		t2fired=true;
 		t.start();
-		
-		
-		
 	}
 	 public void actionPerformed(ActionEvent e) {
 		 if(b1x<=1000&&t1fired) {	
@@ -72,9 +64,8 @@ public class mainProgram extends Applet implements KeyListener, ActionListener{
 			 if(!t2fired) {
 			 t.stop();
 			 }
-			 
-			 
 		 }
+		
 		 if(b2x>=0&&t2fired) {	
 		 b2x-=5; 
 		 repaint();
@@ -86,9 +77,7 @@ public class mainProgram extends Applet implements KeyListener, ActionListener{
 			 t2completed=true;
 			 if(!t1fired) {
 			 t.stop();
-			 }
-			 
-			 
+			 } 
 		 }
 	 	 			     }
 
@@ -157,14 +146,14 @@ public class mainProgram extends Applet implements KeyListener, ActionListener{
 		
 		
 	}
-	@Override
+	
 	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated methsod stub
+		
 	
 	}
-	@Override
+	
 	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
+	
 		
 	}
 }
