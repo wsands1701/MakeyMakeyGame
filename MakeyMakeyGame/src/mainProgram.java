@@ -35,13 +35,13 @@ public class mainProgram extends Applet implements KeyListener, ActionListener{
 		//created bullet rectangles for colition dectection
 		Rectangle bullet1;
 		Rectangle bullet2;
-		
+
 		//created bullet booleans to track if they have been fired, and have completed their path
 		boolean t1fired=false;
 		boolean t2fired=false;
 		boolean t1completed=true;
 		boolean t2completed=true;
-		
+	
 		//created timer for bullet movement
 		Timer t= new Timer(10, this);
 
@@ -54,6 +54,8 @@ public class mainProgram extends Applet implements KeyListener, ActionListener{
 		//set bacground size, color, and initilzed key listenting
 		this.setSize(new Dimension(1000,800));
 		this.setBackground(java.awt.Color.red);
+		
+		
 		addKeyListener(this);
 		
 	}
@@ -199,12 +201,33 @@ public class mainProgram extends Applet implements KeyListener, ActionListener{
 		g.fillRect(tank2x-20, tank2y+20, 20, 10);
 		g.fillRect(b1x, b1y, 10, 10);
 		g.fillRect(b2x, b2y, 10, 10);
-		g.setFont(new Font("TimesRoman", Font.PLAIN, 20)); 
-		g.drawString("Player 1 Score: "+player1score, 0, 20);
+		g.setColor(java.awt.Color.white);
+		g.fillRect(0, 0, 200, 30);
+		g.fillRect(570, 0, 200, 30);
+		g.setColor(java.awt.Color.black);
+		g.setFont(new Font("TimesRoman", Font.BOLD, 20)); 
+		g.drawString("Player 1 Score: "+player1score, 25, 20);
 		g.drawString("Player 2 Score: "+player2score, 600, 20);
 		
 		
 	}
+  public void update(Graphics g) {
+    Graphics offgc;
+    Image offscreen = null;
+    Dimension d = size();
+
+    // create the offscreen buffer and associated Graphics
+    offscreen = createImage(d.width, d.height);
+    offgc = offscreen.getGraphics();
+    // clear the exposed area
+    offgc.setColor(getBackground());
+    offgc.fillRect(0, 0, d.width, d.height);
+    offgc.setColor(getForeground());
+    // do normal redraw
+    paint(offgc);
+    // transfer offscreen to window
+    g.drawImage(offscreen, 0, 0, this);
+    }
 	
 	public void keyReleased(KeyEvent arg0) {
 		
