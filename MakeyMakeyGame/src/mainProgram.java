@@ -16,12 +16,16 @@ public class mainProgram extends Applet implements KeyListener, ActionListener{
 		int tank2x=600;
 		int tank1y=100;
 		int tank2y=100;
-		int player1score;
-		int player2score;
+		int player1score=0;
+		int player2score=0;
 		int b1x=-10;
 		int b1y=-10;
 		int b2x=-10;
 		int b2y=-10;
+		Rectangle tank1;
+		Rectangle tank2;
+		Rectangle bullet1;
+		Rectangle bullet2;
 		boolean t1fired=false;
 		boolean t2fired=false;
 		boolean t1completed=true;
@@ -52,6 +56,32 @@ public class mainProgram extends Applet implements KeyListener, ActionListener{
 		t.start();
 	}
 	 public void actionPerformed(ActionEvent e) {
+		 bullet1 = new Rectangle(b1x, b1y, 10, 10);
+		 bullet2 = new Rectangle(b2x, b2y, 10, 10);
+		 tank1 = new Rectangle(tank1x, tank1y, 50, 50);
+		 tank2 = new Rectangle(tank2x, tank2y, 50, 50);
+		 if(tank2.contains(bullet1)) {
+			 player1score++;
+			 repaint();
+			 b1x=-10;
+			 b1y=-10;
+			 t1fired=false;
+			 t1completed=true;
+			 if(!t2fired) {
+			 t.stop();
+			 } 
+		 }
+		 if(tank1.contains(bullet2)) {
+			 player2score++;
+			 repaint();
+			 b2x=-10;
+			 b2y=-10;
+			 t2fired=false;
+			 t2completed=true;
+			 if(!t1fired) {
+			 t.stop();
+			 }
+		 }
 		 if(b1x<=1000&&t1fired) {	
 		 b1x+=5; 
 		 repaint();
@@ -82,41 +112,43 @@ public class mainProgram extends Applet implements KeyListener, ActionListener{
 	 	 			     }
 
 	public void keyPressed(KeyEvent e) {
-	 if(e.getKeyCode()==KeyEvent.VK_UP) {
-		 tank1y-=10;
+		 tank1 = new Rectangle(tank1x, tank1y, 50, 50);
+		 tank2 = new Rectangle(tank2x, tank2y, 50, 50);
+		if(e.getKeyCode()==KeyEvent.VK_UP) {
+		 tank2y-=10; 
 		 repaint();
 	 }
 	 if(e.getKeyCode()==KeyEvent.VK_DOWN) {
-		 tank1y+=10;
-		 repaint();
-		
-	 }
-	 if(e.getKeyCode()==KeyEvent.VK_RIGHT) {
-		 tank1x+=10;
-		 repaint();
-		
-	 }
-	 if(e.getKeyCode()==KeyEvent.VK_LEFT) {
-		 tank1x-=10;
-		 repaint();
-		
-	 }
-	 if(e.getKeyCode()==KeyEvent.VK_W) {
-		 tank2y-=10;
-		 repaint();
-	 }
-	 if(e.getKeyCode()==KeyEvent.VK_S) {
 		 tank2y+=10;
 		 repaint();
 		
 	 }
-	 if(e.getKeyCode()==KeyEvent.VK_D) {
+	 if(e.getKeyCode()==KeyEvent.VK_RIGHT) {
 		 tank2x+=10;
 		 repaint();
 		
 	 }
-	 if(e.getKeyCode()==KeyEvent.VK_A) {
+	 if(e.getKeyCode()==KeyEvent.VK_LEFT) {
 		 tank2x-=10;
+		 repaint();
+		
+	 }
+	 if(e.getKeyCode()==KeyEvent.VK_W) {
+		 tank1y-=10;
+		 repaint();
+	 }
+	 if(e.getKeyCode()==KeyEvent.VK_S) {
+		 tank1y+=10;
+		 repaint();
+		
+	 }
+	 if(e.getKeyCode()==KeyEvent.VK_D) {
+		 tank1x+=10;
+		 repaint();
+		
+	 }
+	 if(e.getKeyCode()==KeyEvent.VK_A) {
+		 tank1x-=10;
 		 repaint();
 		
 	 }
@@ -143,6 +175,9 @@ public class mainProgram extends Applet implements KeyListener, ActionListener{
 		g.fillRect(tank2x-20, tank2y+20, 20, 10);
 		g.fillRect(b1x, b1y, 10, 10);
 		g.fillRect(b2x, b2y, 10, 10);
+		g.setFont(new Font("TimesRoman", Font.PLAIN, 20)); 
+		g.drawString("Player 1 Score: "+player1score, 0, 20);
+		g.drawString("Player 2 Score: "+player2score, 600, 20);
 		
 		
 	}
