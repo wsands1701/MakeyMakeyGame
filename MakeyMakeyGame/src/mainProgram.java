@@ -41,9 +41,10 @@ public class mainProgram extends Applet implements KeyListener, ActionListener{
 		boolean t2fired=false;
 		boolean t1completed=true;
 		boolean t2completed=true;
+		boolean gamewon=false;
 		
 		//initialized audio
-		//AudioClip bigWin= getAudioClip(getDocumentBase(), "bigwin.mp3");
+		AudioClip bigWin;
 	
 		//created timer for bullet movement
 		Timer t= new Timer(10, this);
@@ -57,6 +58,8 @@ public class mainProgram extends Applet implements KeyListener, ActionListener{
 		//set bacground size, color, and initilzed key listenting
 		this.setSize(new Dimension(1000,800));
 		this.setBackground(java.awt.Color.red);
+		bigWin= getAudioClip(getDocumentBase(),"bigwin.wav");
+		
 		addKeyListener(this);
 		
 	}
@@ -66,6 +69,7 @@ public class mainProgram extends Applet implements KeyListener, ActionListener{
 		b1y=tank1y+20;
 		t1fired=true;
 		t.start();
+		
 	}
 	public void b2fired() {
 		b2x=tank2x+10;
@@ -218,6 +222,10 @@ public class mainProgram extends Applet implements KeyListener, ActionListener{
 			g.setColor(java.awt.Color.black);
 			g.setFont(new Font("ComicSans", Font.BOLD, 40)); 
 			g.drawString("Player 1 Wins", 300,300);
+			gamewon=true;
+			removeKeyListener(this);
+			bigWin.play();
+			
 			
 		}
 		if(player2score>=10) {
@@ -227,7 +235,10 @@ public class mainProgram extends Applet implements KeyListener, ActionListener{
 			g.setColor(java.awt.Color.black);
 			g.setFont(new Font("ComicSans", Font.BOLD, 40)); 
 			g.drawString("Player 2 Wins", 300,300);
+			removeKeyListener(this);
+			bigWin.play();
 		}
+
 		
 		
 	}
