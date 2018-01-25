@@ -41,6 +41,9 @@ public class mainProgram extends Applet implements KeyListener, ActionListener{
 		boolean t2fired=false;
 		boolean t1completed=true;
 		boolean t2completed=true;
+		
+		//initialized audio
+		//AudioClip bigWin= getAudioClip(getDocumentBase(), "bigwin.mp3");
 	
 		//created timer for bullet movement
 		Timer t= new Timer(10, this);
@@ -54,8 +57,6 @@ public class mainProgram extends Applet implements KeyListener, ActionListener{
 		//set bacground size, color, and initilzed key listenting
 		this.setSize(new Dimension(1000,800));
 		this.setBackground(java.awt.Color.red);
-		
-		
 		addKeyListener(this);
 		
 	}
@@ -195,6 +196,7 @@ public class mainProgram extends Applet implements KeyListener, ActionListener{
 	public void paint(Graphics g) 
 	{
 		//draws all sprites to the screen
+		if(player1score<10&&player2score<10) {
 		g.fillRect(tank1x, tank1y, 50, 50);
 		g.fillRect(tank2x, tank2y, 50, 50);
 		g.fillRect(tank1x+50, tank1y+20, 20, 10);
@@ -205,12 +207,32 @@ public class mainProgram extends Applet implements KeyListener, ActionListener{
 		g.fillRect(0, 0, 200, 30);
 		g.fillRect(570, 0, 200, 30);
 		g.setColor(java.awt.Color.black);
-		g.setFont(new Font("TimesRoman", Font.BOLD, 20)); 
+		g.setFont(new Font("ComicSans", Font.BOLD, 20)); 
 		g.drawString("Player 1 Score: "+player1score, 25, 20);
 		g.drawString("Player 2 Score: "+player2score, 600, 20);
+		}
+		if(player1score>=10) {
+			player2score=0;
+			g.setColor(java.awt.Color.red);
+			g.drawRect(0, 0, 800, 1000);
+			g.setColor(java.awt.Color.black);
+			g.setFont(new Font("ComicSans", Font.BOLD, 40)); 
+			g.drawString("Player 1 Wins", 300,300);
+			
+		}
+		if(player2score>=10) {
+			player1score=0;
+			g.setColor(java.awt.Color.red);
+			g.drawRect(0, 0, 800, 1000);
+			g.setColor(java.awt.Color.black);
+			g.setFont(new Font("ComicSans", Font.BOLD, 40)); 
+			g.drawString("Player 2 Wins", 300,300);
+		}
 		
 		
 	}
+	
+	
     public void update(Graphics g) {
     	Graphics offgc;
     	Image offscreen = null;
@@ -226,7 +248,7 @@ public class mainProgram extends Applet implements KeyListener, ActionListener{
     	// do normal redraw
     	paint(offgc);
     	// transfer offscreen to window
-    	g.drawImage(offscreen, 0, 0, this);
+    	 g.drawImage(offscreen, 0, 0, this);
     }
 	
 	public void keyReleased(KeyEvent arg0) {
